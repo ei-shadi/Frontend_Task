@@ -24,7 +24,8 @@ const faqs = [
 ];
 
 const Faq = () => {
-  const [openIndex, setOpenIndex] = useState(null);
+  // 👇 Default open first question
+  const [openIndex, setOpenIndex] = useState(0);
 
   const toggleFaq = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -36,25 +37,30 @@ const Faq = () => {
         Frequently asked questions
       </h2>
 
-      <div className="space-y-4">
+      <div className="space-y-4 md:w-[688px] lg:w-full xl:w-[920px] 2xl:w-full mx-auto">
         {faqs.map((faq, index) => (
           <div
             key={index}
-            className={`pb-4 cursor-pointer ${index !== faqs.length - 1 ? "border-b border-gray-200" : ""
-              }`}
+            className={`cursor-pointer ${
+              index !== faqs.length - 1 ? "border-b border-gray-200" : ""
+            }`}
             onClick={() => toggleFaq(index)}
           >
             <div className="flex justify-between items-center">
-              <h3 className="text-[16px] md:text-xl lg:text-[28px] font-semibold">{faq.question}</h3>
+              <h3 className="text-[16px] md:text-xl lg:text-[28px] font-semibold">
+                {faq.question}
+              </h3>
               {openIndex === index ? (
-                <ChevronUp className="w-5 h-5" />
+                <ChevronUp className="w-5 h-5 text-[#AAB6B5]" />
               ) : (
-                <ChevronDown className="w-5 h-5" />
+                <ChevronDown className="w-5 h-5 text-[#AAB6B5]" />
               )}
             </div>
 
             {openIndex === index && (
-              <p className="mt-3 mb-4 md:mt-5 md:mb-6 lg:mt-5 lg:mb-8 text-sm lg:text-lg text-gray-600">{faq.answer}</p>
+              <p className="mt-3 mb-4 md:mt-5 md:mb-6 lg:mt-5 lg:mb-8 text-sm lg:text-lg text-gray-600 w-[306px] md:w-[616px] lg:w-[800px] xl:w-[848px]">
+                {faq.answer}
+              </p>
             )}
           </div>
         ))}
